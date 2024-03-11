@@ -1,5 +1,8 @@
 package com.maxidev.contact.ui.presentation.contacts
 
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.State
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.maxidev.contact.data.local.entity.ContactEntity
@@ -24,6 +27,13 @@ class ContactViewModel @Inject constructor(
     private val _state = MutableStateFlow(ContactState())
     val state = _state.value
 
+    private val _query: MutableState<String> = mutableStateOf("")
+    val query: State<String> = _query
+
+    fun onQueryChange(newQuery: String) {
+        _query.value = newQuery
+    }
+
     fun onNameChanged(newName: String) {
         _state.value.name.value = newName
     }
@@ -47,13 +57,6 @@ class ContactViewModel @Inject constructor(
             )
 
     fun upsertContact(contact: ContactEntity) {
-//        val entity = ContactEntity(
-//            id = _state.value.id,
-//            name = _state.value.name.value,
-//            lastName = _state.value.lastName.value,
-//            phone = _state.value.phone.value
-//        )
-
         viewModelScope.launch(ioDispatcher) {
             repository.upsert(contact)
         }
@@ -68,6 +71,12 @@ class ContactViewModel @Inject constructor(
     fun deleteAllContact() {
         viewModelScope.launch(ioDispatcher) {
             repository.deleteAll()
+        }
+    }
+
+    fun contactByName(name: String) { // Search functionality
+        viewModelScope.launch(ioDispatcher) {
+            repository.getContactsByName(name)
         }
     }
 }
