@@ -10,11 +10,15 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Add
 import androidx.compose.material.icons.outlined.Delete
+import androidx.compose.material3.DockedSearchBar
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FabPosition
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -26,6 +30,7 @@ import com.maxidev.contact.ui.presentation.components.SmallFabComponent
 import com.maxidev.contact.ui.presentation.components.TopBarComponent
 import com.maxidev.contact.ui.presentation.contacts.components.ContactCard
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ContactScreen(
     viewModel: ContactViewModel,
@@ -33,10 +38,27 @@ fun ContactScreen(
     onEdit: (ContactEntity) -> Unit
 ) {
     val content by viewModel.contentState.collectAsStateWithLifecycle()
+    val sq by viewModel.searchContact.collectAsStateWithLifecycle()
+    val query by viewModel.query
+    var active by remember { mutableStateOf(false) }
 
     Scaffold(
         topBar = {
-            TopBarComponent(label = R.string.contacts)
+            Column {
+                TopBarComponent(label = R.string.contacts)
+                DockedSearchBar(
+                    query = query,
+                    onQueryChange = viewModel::onQueryChange,
+                    onSearch = {
+                        active = false
+                        viewModel.searchContact(it)
+                    },
+                    active = active,
+                    onActiveChange = { active = true }
+                ) {
+                    // Do something
+                }
+            }
         },
         floatingActionButton = {
             Column(
@@ -60,7 +82,7 @@ fun ContactScreen(
             modifier = Modifier.padding(paddingValues),
             onDelete = { viewModel.deleteContact(it) },
             onEdit = { onEdit(it) },
-            contact = content.listContent
+            contact = if (query.isEmpty()) content.listContent else sq
         )
     }
 }

@@ -12,7 +12,7 @@ interface ContactDao {
     @Query("SELECT * FROM contacts")
     fun getAllContacts(): Flow<List<ContactEntity>>
 
-    @Query("SELECT * FROM contacts WHERE name LIKE :name")
+    @Query("SELECT * FROM contacts WHERE contacts.name LIKE '%' || :name || '%'")
     fun getContactsByName(name: String): Flow<List<ContactEntity>>
 
     @Query("SELECT * FROM contacts WHERE id=:id")

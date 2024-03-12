@@ -9,14 +9,17 @@ import com.maxidev.contact.data.local.entity.ContactEntity
 import com.maxidev.contact.data.repository.impl.ContactRepositoryImpl
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+@OptIn(FlowPreview::class)
 @HiltViewModel
 class ContactViewModel @Inject constructor(
     private val repository: ContactRepositoryImpl
@@ -74,9 +77,14 @@ class ContactViewModel @Inject constructor(
         }
     }
 
-    fun contactByName(name: String) { // Search functionality
-        viewModelScope.launch(ioDispatcher) {
-            repository.getContactsByName(name)
+    private val _searchContact = MutableStateFlow<List<ContactEntity>>(emptyList())
+    val searchContact = _searchContact
+
+    fun searchContact(query: String) {
+        viewModelScope.launch {
+            repository.getContactsByName(query)
+                .debounce(300)
+                .collect { _searchContact.value = it }
         }
     }
 }
