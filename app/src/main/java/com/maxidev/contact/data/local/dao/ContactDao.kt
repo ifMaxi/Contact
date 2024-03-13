@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface ContactDao {
-    @Query("SELECT * FROM contacts")
+    @Query("SELECT * FROM contacts ORDER BY contacts.name ASC")
     fun getAllContacts(): Flow<List<ContactEntity>>
 
     @Query("SELECT * FROM contacts WHERE contacts.name LIKE '%' || :name || '%'")
@@ -18,8 +18,11 @@ interface ContactDao {
     @Query("SELECT * FROM contacts WHERE id=:id")
     fun getContactById(id: Long): Flow<List<ContactEntity>>
 
-    @Query("SELECT * FROM contacts ORDER BY name ASC")
-    fun sortContactByName(): Flow<List<ContactEntity>>
+//    @Query("SELECT * FROM contacts ORDER BY name ASC")
+//    fun sortContactByNameAsc(): Flow<List<ContactEntity>>
+//
+//    @Query("SELECT * FROM contacts ORDER BY name DESC")
+//    fun sortContactByNameDesc(): Flow<List<ContactEntity>>
 
     @Upsert
     suspend fun upsertContact(contact: ContactEntity)
@@ -27,6 +30,6 @@ interface ContactDao {
     @Delete
     suspend fun deleteContact(contact: ContactEntity)
 
-    @Query("DELETE FROM contacts")
-    suspend fun deleteAllContacts()
+//    @Query("DELETE FROM contacts")
+//    suspend fun deleteAllContacts()
 }

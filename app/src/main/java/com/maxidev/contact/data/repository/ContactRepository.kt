@@ -10,11 +10,13 @@ interface ContactRepository {
 
     fun getContactsById(id: Long): Flow<List<ContactEntity>>
 
-    fun sortContactsByName(): Flow<List<ContactEntity>>
+//    fun sortContactsByNameAsc(): Flow<List<ContactEntity>>
+//
+//    fun sortContactsByNameDesc(): Flow<List<ContactEntity>>
 
     suspend fun upsert(contact: ContactEntity)
 
     suspend fun delete(contact: ContactEntity)
 
-    suspend fun deleteAll()
+    // suspend fun deleteAll()
 }

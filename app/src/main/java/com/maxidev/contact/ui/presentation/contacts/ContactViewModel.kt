@@ -71,17 +71,17 @@ class ContactViewModel @Inject constructor(
         }
     }
 
-    fun deleteAllContact() {
-        viewModelScope.launch(ioDispatcher) {
-            repository.deleteAll()
-        }
-    }
+//    fun deleteAllContact() {
+//        viewModelScope.launch(ioDispatcher) {
+//            repository.deleteAll()
+//        }
+//    }
 
     private val _searchContact = MutableStateFlow<List<ContactEntity>>(emptyList())
     val searchContact = _searchContact
 
     fun searchContact(query: String) {
-        viewModelScope.launch {
+        viewModelScope.launch(ioDispatcher) {
             repository.getContactsByName(query)
                 .debounce(300)
                 .collect { _searchContact.value = it }
