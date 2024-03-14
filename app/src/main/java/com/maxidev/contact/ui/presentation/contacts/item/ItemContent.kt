@@ -25,6 +25,7 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.maxidev.contact.R
 import com.maxidev.contact.ui.presentation.components.TextFieldComponent
 import com.maxidev.contact.ui.presentation.contacts.components.TitleComponent
 import com.maxidev.contact.ui.theme.ContactTheme
@@ -48,9 +49,9 @@ fun ItemContent(
     Column(
         modifier = modifier
             .fillMaxSize()
-            .padding(4.dp),
+            .padding(20.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(10.dp)
+        verticalArrangement = Arrangement.spacedBy(6.dp)
     ) {
         InputFields(
             input = name,
@@ -96,7 +97,7 @@ private fun InputFields(
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(4.dp),
+            .padding(10.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(10.dp)
     ) {
@@ -137,8 +138,8 @@ private fun InputPreview() {
             TitleComponent(
                 onCancel = {},
                 onSave = {},
-                title = 0,
-                label = 0
+                title = R.string.new_contact,
+                label = R.string.save
             )
             ItemContent(
                 name = "",

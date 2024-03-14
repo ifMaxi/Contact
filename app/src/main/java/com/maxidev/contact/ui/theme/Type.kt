@@ -9,11 +9,11 @@ import androidx.compose.ui.unit.sp
 import com.maxidev.contact.R
 
 val poppinsFamily = FontFamily(
-    Font(R.font.poppins, FontWeight.Light),
+    Font(R.font.poppins_light, FontWeight.Light),
     Font(R.font.poppins, FontWeight.Normal),
-    Font(R.font.poppins, FontWeight.Medium),
-    Font(R.font.poppins, FontWeight.SemiBold),
-    Font(R.font.poppins, FontWeight.Bold)
+    Font(R.font.poppins_medium, FontWeight.Medium),
+    Font(R.font.poppins_semibold, FontWeight.SemiBold),
+    Font(R.font.poppins_bold, FontWeight.Bold)
 )
 
 // Set of Material typography styles to start with

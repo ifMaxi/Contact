@@ -34,7 +34,7 @@ fun TitleComponent(
         modifier = modifier
             .fillMaxWidth()
             .height(100.dp)
-            .padding(4.dp),
+            .padding(8.dp),
         horizontalArrangement = Arrangement.Start,
         verticalAlignment = Alignment.CenterVertically
     ) {

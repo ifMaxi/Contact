@@ -42,11 +42,11 @@ fun AddContactScreen(
         ItemContent(
             modifier = Modifier.padding(paddingValues),
             name = name ?: "",
-            onNameChange = { viewModel.onNameChanged(it) },
+            onNameChange = viewModel::onNameChanged,
             last = lastName ?: "",
-            onLastChange = { viewModel.onLastNameChanged(it) },
+            onLastChange = viewModel::onLastNameChanged,
             phone = phone ?: "",
-            onPhoneChange = { viewModel.onPhoneChanged(it) },
+            onPhoneChange = viewModel::onPhoneChanged,
         )
     }
 }

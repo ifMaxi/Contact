@@ -14,8 +14,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
@@ -27,6 +25,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.core.content.ContextCompat
 import com.maxidev.contact.ui.theme.ContactTheme
 
@@ -42,48 +41,44 @@ fun ContactCard(
     val intentCall = Intent(Intent.ACTION_DIAL).setData(Uri.parse("tel:$phone"))
     val context = LocalContext.current
 
-    Card(
+    Row(
         modifier = Modifier
             .fillMaxWidth()
+            .wrapContentHeight()
             .padding(4.dp)
             .clickable { openDialog.value = true },
-        elevation = CardDefaults.cardElevation(6.dp)
+        horizontalArrangement = Arrangement.spacedBy(6.dp),
+        verticalAlignment = Alignment.CenterVertically
     ) {
-        Row(
+        Box(
             modifier = Modifier
-                .fillMaxWidth()
-                .padding(4.dp),
-            horizontalArrangement = Arrangement.spacedBy(6.dp),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Box(
-                modifier = Modifier
-                    .wrapContentHeight(Alignment.CenterVertically)
-                    .padding(4.dp)
-                    .size(50.dp)
-                    .border(
-                        BorderStroke(
-                            width = 1.dp,
-                            color = Color.Black
-                        ),
-                        shape = CircleShape
-                    )
-                    .clip(CircleShape),
-                contentAlignment = Alignment.Center
-            ) {
-                Text(
-                    text = name.first().toString()
+                .wrapContentHeight(Alignment.CenterVertically)
+                .padding(4.dp)
+                .size(40.dp)
+                .border(
+                    BorderStroke(
+                        width = 1.dp,
+                        color = Color.Black
+                    ),
+                    shape = CircleShape
                 )
-            }
+                .clip(CircleShape),
+            contentAlignment = Alignment.Center
+        ) {
             Text(
-                text = name
-            )
-            Spacer(modifier = Modifier.weight(1f))
-            DropMenuComponent(
-                onDelete = { onDelete() },
-                onEdit = { onEdit() }
+                text = name.first().toString(),
+                fontSize = 25.sp
             )
         }
+        Text(
+            text = name,
+            fontSize = 18.sp
+        )
+        Spacer(modifier = Modifier.weight(1f))
+        DropMenuComponent(
+            onDelete = { onDelete() },
+            onEdit = { onEdit() }
+        )
     }
 
     if (openDialog.value) {
