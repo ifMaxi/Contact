@@ -7,6 +7,8 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
+import com.maxidev.contact.ui.theme.ContactTheme
 
 @Composable
 fun TextFieldComponent(
@@ -22,8 +24,26 @@ fun TextFieldComponent(
         value = input,
         onValueChange = onInputChange,
         singleLine = true,
-        label = { Text(text = label) },
+        label = {
+            Text(
+                text = label
+            )
+        },
         keyboardActions = keyboardActions,
         keyboardOptions = keyboardOptions
     )
+}
+
+@Preview
+@Composable
+private fun TextFieldPreview() {
+    ContactTheme {
+        TextFieldComponent(
+            input = "",
+            onInputChange = {},
+            label = "Lorem Impsum",
+            keyboardOptions = KeyboardOptions.Default,
+            keyboardActions = KeyboardActions.Default
+        )
+    }
 }

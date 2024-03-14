@@ -8,33 +8,38 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.maxidev.contact.ui.theme.ContactTheme
+import com.maxidev.contact.ui.theme.poppinsFamily
 
 @Composable
 fun ButtonTonalComponent(
+    modifier: Modifier = Modifier,
     onClick: () -> Unit,
     label: String
 ) {
     FilledTonalButton(
-        modifier = Modifier,
+        modifier = modifier,
         onClick = onClick
     ) {
         Text(
-            text = label
+            text = label,
+            fontFamily = poppinsFamily
         )
     }
 }
 
 @Composable
 fun OutlinedButtonComponent(
+    modifier: Modifier = Modifier,
     onClick: () -> Unit,
     label: String
 ) {
     OutlinedButton(
-        modifier = Modifier,
+        modifier = modifier,
         onClick = onClick
     ) {
         Text(
-            text = label
+            text = label,
+            fontFamily = poppinsFamily
         )
     }
 }

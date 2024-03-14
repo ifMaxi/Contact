@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Close
@@ -15,6 +16,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import com.maxidev.contact.R
 import com.maxidev.contact.ui.presentation.components.ButtonTonalComponent
 import com.maxidev.contact.ui.presentation.components.IconButtonComponent
 import com.maxidev.contact.ui.theme.ContactTheme
@@ -30,6 +33,7 @@ fun TitleComponent(
     Row(
         modifier = modifier
             .fillMaxWidth()
+            .height(100.dp)
             .padding(4.dp),
         horizontalArrangement = Arrangement.Start,
         verticalAlignment = Alignment.CenterVertically
@@ -39,7 +43,8 @@ fun TitleComponent(
             icon = Icons.Outlined.Close
         )
         Text(
-            text = stringResource(id = title)
+            text = stringResource(id = title),
+            fontSize = 25.sp
         )
         Spacer(modifier = Modifier.weight(1f))
         ButtonTonalComponent(
@@ -54,10 +59,10 @@ fun TitleComponent(
 private fun TitlePreview() {
     ContactTheme {
         TitleComponent(
-            title = 0,
+            title = R.string.new_contact,
             onCancel = {},
             onSave = {},
-            label = 0
+            label = R.string.save
         )
     }
 }

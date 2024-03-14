@@ -8,7 +8,10 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.sp
+import com.maxidev.contact.R
 import com.maxidev.contact.ui.theme.ContactTheme
+import com.maxidev.contact.ui.theme.poppinsFamily
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -20,7 +23,9 @@ fun TopBarComponent(
     TopAppBar(
         title = {
             Text(
-                text = stringResource(id = label)
+                text = stringResource(id = label),
+                fontFamily = poppinsFamily,
+                fontSize = 35.sp
             )
         },
         scrollBehavior = scrollBehavior
@@ -31,6 +36,6 @@ fun TopBarComponent(
 @Composable
 private fun TopBarPreview() {
     ContactTheme {
-        TopBarComponent(label = 0)
+        TopBarComponent(label = R.string.contacts)
     }
 }
