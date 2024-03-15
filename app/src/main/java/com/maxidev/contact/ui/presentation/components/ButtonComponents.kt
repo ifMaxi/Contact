@@ -46,7 +46,7 @@ fun OutlinedButtonComponent(
 
 @Preview
 @Composable
-fun ButtonPreview() {
+private fun ButtonPreview() {
     ContactTheme {
         Row {
             ButtonTonalComponent(
