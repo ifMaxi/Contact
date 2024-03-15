@@ -79,6 +79,7 @@ fun ContactScreen(
                                 viewModel.searchContact(it)
                             }
                         }
+                        focusManager.clearFocus()
                     },
                     active = active,
                     onActiveChange = {
