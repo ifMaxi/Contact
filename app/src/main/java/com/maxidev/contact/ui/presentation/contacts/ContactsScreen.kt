@@ -25,6 +25,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -49,6 +50,7 @@ fun ContactScreen(
     var active by remember { mutableStateOf(false) }
     val scope = rememberCoroutineScope()
     val snackBarHostState = remember { SnackbarHostState() }
+    val focusManager = LocalFocusManager.current
 
     Scaffold(
         snackbarHost = {
@@ -82,7 +84,10 @@ fun ContactScreen(
                     onActiveChange = {
                         active = false
                     },
-                    onClearText = { viewModel.onQueryChange("") }
+                    onClearText = {
+                        viewModel.onQueryChange("")
+                        focusManager.clearFocus()
+                    }
                 )
             }
         },
