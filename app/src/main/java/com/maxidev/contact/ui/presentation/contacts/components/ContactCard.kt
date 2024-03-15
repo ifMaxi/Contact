@@ -8,7 +8,6 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -74,11 +73,6 @@ fun ContactCard(
             text = name,
             fontSize = 18.sp
         )
-        Spacer(modifier = Modifier.weight(1f))
-        DropMenuComponent(
-            onDelete = { onDelete() },
-            onEdit = { onEdit() }
-        )
     }
 
     if (openDialog.value) {
@@ -86,6 +80,14 @@ fun ContactCard(
             onCall = { ContextCompat.startActivity(context, intentCall, null) },
             onConfirm = { openDialog.value = false },
             onDismiss = { openDialog.value = false },
+            onDelete = {
+                openDialog.value = false
+                onDelete()
+            },
+            onEdit = {
+                openDialog.value = false
+                onEdit()
+            },
             name = name,
             lastName = lastName,
             phone = phone
