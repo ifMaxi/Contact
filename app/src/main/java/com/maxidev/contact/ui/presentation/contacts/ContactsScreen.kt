@@ -11,6 +11,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.FabPosition
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarDuration
 import androidx.compose.material3.SnackbarHost
@@ -146,7 +147,8 @@ private fun ListContent(
             stickyHeader {
                 Surface(
                     modifier = Modifier
-                        .fillParentMaxWidth()
+                        .fillParentMaxWidth(),
+                    color = MaterialTheme.colorScheme.background
                 ) {
                     Text(
                         text = name.first().toString(),
