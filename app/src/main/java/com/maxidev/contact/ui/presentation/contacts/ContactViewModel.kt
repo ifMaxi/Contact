@@ -6,7 +6,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.maxidev.contact.data.local.entity.ContactEntity
-import com.maxidev.contact.data.repository.impl.ContactRepositoryImpl
+import com.maxidev.contact.data.repository.ContactRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.FlowPreview
@@ -22,7 +22,7 @@ import javax.inject.Inject
 @OptIn(FlowPreview::class)
 @HiltViewModel
 class ContactViewModel @Inject constructor(
-    private val repository: ContactRepositoryImpl
+    private val repository: ContactRepository
 ): ViewModel() {
 
     private val ioDispatcher = Dispatchers.IO
@@ -70,12 +70,6 @@ class ContactViewModel @Inject constructor(
             repository.delete(contact)
         }
     }
-
-//    fun deleteAllContact() {
-//        viewModelScope.launch(ioDispatcher) {
-//            repository.deleteAll()
-//        }
-//    }
 
     private val _searchContact = MutableStateFlow<List<ContactEntity>>(emptyList())
     val searchContact = _searchContact
