@@ -1,6 +1,7 @@
 package com.maxidev.contact.di
 
 import com.maxidev.contact.data.local.dao.ContactDao
+import com.maxidev.contact.data.repository.ContactRepository
 import com.maxidev.contact.data.repository.impl.ContactRepositoryImpl
 import dagger.Module
 import dagger.Provides
@@ -13,6 +14,6 @@ import javax.inject.Singleton
 object RepositoryModule {
     @Provides
     @Singleton
-    fun providesContactRepository(dao: ContactDao): ContactRepositoryImpl =
-        ContactRepositoryImpl(dao)
+    fun providesContactRepository(dao: ContactDao) =
+        ContactRepositoryImpl(dao) as ContactRepository
 }

@@ -18,18 +18,9 @@ class ContactRepositoryImpl @Inject constructor(
     override fun getContactsById(id: Long): Flow<List<ContactEntity>> =
         contactDao.getContactById(id)
 
-//    override fun sortContactsByNameAsc(): Flow<List<ContactEntity>> =
-//        contactDao.sortContactByNameAsc()
-//
-//    override fun sortContactsByNameDesc(): Flow<List<ContactEntity>> =
-//        contactDao.sortContactByNameDesc()
-
     override suspend fun upsert(contact: ContactEntity) =
         contactDao.upsertContact(contact)
 
     override suspend fun delete(contact: ContactEntity) =
         contactDao.deleteContact(contact)
-
-//    override suspend fun deleteAll() =
-//        contactDao.deleteAllContacts()
 }
